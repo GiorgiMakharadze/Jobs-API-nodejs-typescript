@@ -1,7 +1,12 @@
 import express from "express";
 import "dotenv/config";
+import authRouter from "./api/routes/auth";
+import jobsRouter from "./api/routes/jobs";
+
 const app = express();
 const port = process.env.PORT || 3000;
+
+//connect DB
 
 // error handler
 import { notFound } from "./api/middleware/not-found";
@@ -10,9 +15,8 @@ app.use(express.json());
 // extra packages
 
 // routes
-app.get("/", (req, res) => {
-  res.send("jobs api");
-});
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/jobs", jobsRouter);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);

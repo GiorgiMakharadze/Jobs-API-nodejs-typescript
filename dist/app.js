@@ -14,17 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
+const auth_1 = __importDefault(require("./api/routes/auth"));
+const jobs_1 = __importDefault(require("./api/routes/jobs"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
+//connect DB
 // error handler
 const not_found_1 = require("./api/middleware/not-found");
 const error_handler_1 = require("./api/middleware/error-handler");
 app.use(express_1.default.json());
 // extra packages
 // routes
-app.get("/", (req, res) => {
-    res.send("jobs api");
-});
+app.use("/api/v1/auth", auth_1.default);
+app.use("/api/v1/jobs", jobs_1.default);
 app.use(not_found_1.notFound);
 app.use(error_handler_1.errorHandlerMiddleware);
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
