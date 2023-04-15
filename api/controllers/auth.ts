@@ -5,14 +5,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/User";
 
 export const register = async (req: Request, res: Response) => {
-  const { name, email, password } = req.body;
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const tempUser = { name, email, password: hashedPassword };
-
-  const user = await User.create({ ...tempUser });
+  const user = await User.create({ ...req.body });
   res.status(StatusCodes.CREATED).json({ user });
 };
 

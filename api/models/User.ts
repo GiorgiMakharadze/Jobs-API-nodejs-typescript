@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import bcrypt from "bcryptjs";
 import { IUserSchema } from "../../types/userSchemaTypes";
 
 const UserSchema = new Schema({
@@ -22,6 +23,11 @@ const UserSchema = new Schema({
     required: [true, "Please provide password"],
     minlength: 6,
   },
+});
+
+UserSchema.pre<IUserSchema>("save", async function () {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 export default mongoose.model<IUserSchema>("User", UserSchema);
