@@ -39,7 +39,7 @@ const JobSchema = new mongoose_1.Schema({
         type: String,
         enum: ["interview", "declined", "pending"],
     },
-    craetedBy: {
+    createdBy: {
         type: mongoose_1.default.Types.ObjectId,
         ref: "User",
         required: [true, "Please provide user"],

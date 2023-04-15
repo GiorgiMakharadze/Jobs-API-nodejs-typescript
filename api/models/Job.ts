@@ -17,7 +17,7 @@ const JobSchema = new Schema<IJobSchema>(
       type: String,
       enum: ["interview", "declined", "pending"],
     },
-    craetedBy: {
+    createdBy: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: [true, "Please provide user"],
