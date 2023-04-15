@@ -14,14 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
 const http_status_codes_1 = require("http-status-codes");
-const bad_request_1 = require("../errors/bad-request");
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = __importDefault(require("../models/User"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-        throw new bad_request_1.BadRequestError("Please provide name,email and password");
-    }
-    const user = yield User_1.default.create(Object.assign({}, req.body));
+    const salt = yield bcryptjs_1.default.genSalt(10);
+    const hashedPassword = yield bcryptjs_1.default.hash(password, salt);
+    const tempUser = { name, email, password: hashedPassword };
+    const user = yield User_1.default.create(Object.assign({}, tempUser));
     res.status(http_status_codes_1.StatusCodes.CREATED).json({ user });
 });
 exports.register = register;

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
+require("express-async-errors");
 const auth_1 = __importDefault(require("./api/routes/auth"));
 const jobs_1 = __importDefault(require("./api/routes/jobs"));
 const connect_1 = require("./api/db/connect");

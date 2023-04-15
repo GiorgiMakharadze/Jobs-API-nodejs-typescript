@@ -1,3 +1,3 @@
-export interface ICustomAPIError {
-  statusCode: number;
-}
+// export interface ICustomAPIError {
+//   statusCode: number;
+// }
