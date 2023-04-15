@@ -8,10 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
+const http_status_codes_1 = require("http-status-codes");
+const bad_request_1 = require("../errors/bad-request");
+const User_1 = __importDefault(require("../models/User"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send("register user");
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+        throw new bad_request_1.BadRequestError("Please provide name,email and password");
+    }
+    const user = yield User_1.default.create(Object.assign({}, req.body));
+    res.status(http_status_codes_1.StatusCodes.CREATED).json({ user });
 });
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

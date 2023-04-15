@@ -3,13 +3,13 @@ import { IUserSchema } from "../../types/userSchemaTypes";
 
 const UserSchema = new Schema({
   name: {
-    tpye: String,
+    type: String,
     required: [true, "Please provide name"],
     minlength: 3,
     maxlength: 50,
   },
   email: {
-    tpye: String,
+    type: String,
     required: [true, "Please provide email"],
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     unique: true,
   },
   password: {
-    tpye: String,
+    type: String,
     required: [true, "Please provide password"],
     minlength: 6,
     maxlength: 12,

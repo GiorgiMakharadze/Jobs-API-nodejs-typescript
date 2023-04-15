@@ -1,5 +1,5 @@
 import { CustomAPIError } from "./custom-api";
-import { BadRequest } from "./bad-request";
-import { Unauthenticated } from "./unauthenticated";
+import { BadRequestError } from "./bad-request";
+import { UnauthenticatedError } from "./unauthenticated";
 
-export default { CustomAPIError, BadRequest, Unauthenticated };
+export default { CustomAPIError, BadRequestError, UnauthenticatedError };

@@ -1,7 +1,10 @@
 import { StatusCodes } from "http-status-codes";
+import { CustomAPIError } from "./custom-api";
 
-export class BadRequest extends CustomAPIError {
-  constructor(message: string, statusCode: number = StatusCodes.BAD_REQUEST) {
-    super(message, statusCode);
+export class BadRequestError extends CustomAPIError {
+  statusCode = StatusCodes.BAD_REQUEST;
+
+  constructor(message: string) {
+    super(message, StatusCodes.BAD_REQUEST);
   }
 }
