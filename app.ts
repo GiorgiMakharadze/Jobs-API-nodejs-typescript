@@ -6,6 +6,7 @@ import jobsRouter from "./api/routes/jobs";
 import { connectDB } from "./api/db/connect";
 import { notFound } from "./api/middleware/not-found";
 import { errorHandlerMiddleware } from "./api/middleware/error-handler";
+import { auth } from "./api/middleware/authentication";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +15,7 @@ app.use(express.json());
 
 // routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/v1/jobs", auth, jobsRouter);
 
 // error handler
 

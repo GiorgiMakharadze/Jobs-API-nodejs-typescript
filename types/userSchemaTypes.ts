@@ -4,4 +4,5 @@ export interface IUserSchema extends Document {
   email: String;
   password: string;
   createJWT: () => string;
+  comparePassword: (candidatePassword: string) => Promise<boolean>;
 }

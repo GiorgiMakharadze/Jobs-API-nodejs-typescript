@@ -20,12 +20,13 @@ const jobs_1 = __importDefault(require("./api/routes/jobs"));
 const connect_1 = require("./api/db/connect");
 const not_found_1 = require("./api/middleware/not-found");
 const error_handler_1 = require("./api/middleware/error-handler");
+const authentication_1 = require("./api/middleware/authentication");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use(express_1.default.json());
 // routes
 app.use("/api/v1/auth", auth_1.default);
-app.use("/api/v1/jobs", jobs_1.default);
+app.use("/api/v1/jobs", authentication_1.auth, jobs_1.default);
 // error handler
 app.use(not_found_1.notFound);
 app.use(error_handler_1.errorHandlerMiddleware);
