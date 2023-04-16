@@ -12,7 +12,7 @@ In this build I used Node.js, Express.js, MongoDb, Mongoose, Typecript, Nodemon,
 
 ## Documentation
 
-https://jobs-api-d3kj.onrender.com/api/v1/api-docs
+https://jobs-api-d3kj.onrender.com/api-docs/#/
 
 ## How to install
 
