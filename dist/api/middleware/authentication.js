@@ -16,7 +16,6 @@ exports.auth = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const unauthenticated_1 = require("../errors/unauthenticated");
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    //Check header
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         throw new unauthenticated_1.UnauthenticatedError("Authentication invalid");
@@ -24,7 +23,6 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
     const token = authHeader.split(" ")[1];
     try {
         const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-        //Attach the user to the job routes
         req.user = { userId: payload.userId, name: payload.name };
         next();
     }

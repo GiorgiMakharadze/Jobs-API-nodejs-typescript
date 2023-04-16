@@ -15,6 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
 require("express-async-errors");
+const xss_clean_1 = __importDefault(require("xss-clean"));
+const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
 const auth_1 = __importDefault(require("./api/routes/auth"));
 const jobs_1 = __importDefault(require("./api/routes/jobs"));
 const connect_1 = require("./api/db/connect");
@@ -23,7 +27,16 @@ const error_handler_1 = require("./api/middleware/error-handler");
 const authentication_1 = require("./api/middleware/authentication");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
+//middlewares & extra security packages
+app.set("trust proxy", 1);
+app.use((0, express_rate_limit_1.default)({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+}));
 app.use(express_1.default.json());
+app.use((0, helmet_1.default)());
+app.use((0, cors_1.default)());
+app.use((0, xss_clean_1.default)());
 // routes
 app.use("/api/v1/auth", auth_1.default);
 app.use("/api/v1/jobs", authentication_1.auth, jobs_1.default);

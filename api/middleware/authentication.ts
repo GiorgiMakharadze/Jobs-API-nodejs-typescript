@@ -9,7 +9,6 @@ export const auth = async (
   res: Response,
   next: NextFunction
 ) => {
-  //Check header
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new UnauthenticatedError("Authentication invalid");
@@ -18,7 +17,7 @@ export const auth = async (
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET!) as TokenPayload;
-    //Attach the user to the job routes
+
     req.user = { userId: payload.userId, name: payload.name };
     next();
   } catch (error) {
