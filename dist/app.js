@@ -19,6 +19,8 @@ const xss_clean_1 = __importDefault(require("xss-clean"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const yamljs_1 = __importDefault(require("yamljs"));
 const auth_1 = __importDefault(require("./api/routes/auth"));
 const jobs_1 = __importDefault(require("./api/routes/jobs"));
 const connect_1 = require("./api/db/connect");
@@ -37,6 +39,12 @@ app.use(express_1.default.json());
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)());
 app.use((0, xss_clean_1.default)());
+//Swagger
+const swaggerDocument = yamljs_1.default.load("./swagger.yaml");
+app.get("/", (req, res) => {
+    res.send("<h1>jobs API</h1><a href='/api-docs'>Documentation</a>");
+});
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 // routes
 app.use("/api/v1/auth", auth_1.default);
 app.use("/api/v1/jobs", authentication_1.auth, jobs_1.default);

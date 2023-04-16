@@ -10,6 +10,10 @@ This is a REST API application for managing job listings. It provides endpoints 
 
 In this build I used Node.js, Express.js, MongoDb, Mongoose, Typecript, Nodemon, Morgan, Dotenv, Helmet, CORS, XSS-Clean, Express Rate Limit.
 
+## Documentation
+
+https://jobs-api-d3kj.onrender.com/api/v1/api-docs
+
 ## How to install
 
 Download and run npm install, then create a .env file at the root of the project and set the following environment variables:
